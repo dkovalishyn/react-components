@@ -1,86 +1,328 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8"/>
-	<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-	/>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-	<title>React components</title>
-	<link rel="icon" href="./assets/react.jpg" type="image/jpg" />
+    <title>React components</title>
+    <link rel="icon" href="./assets/react.jpg" type="image/jpg" />
 
-	<link rel="stylesheet" href="css/reset.css"/>
-	<link rel="stylesheet" href="css/reveal.css"/>
-	<link rel="stylesheet" href="css/theme/black.css"/>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/reveal.css" />
+    <link rel="stylesheet" href="css/theme/black.css" />
 
-	<!-- Theme used for syntax highlighting of code -->
-	<link href="css/prism.css" rel="stylesheet"/>
+    <!-- Theme used for syntax highlighting of code -->
+    <link href="css/prism.css" rel="stylesheet" />
 
-	<!-- Printing and PDF exports -->
-	<script>
-		var link = document.createElement("link");
-		link.rel = "stylesheet";
-		link.type = "text/css";
-		link.href = window.location.search.match(/print-pdf/gi)
-				? "css/print/pdf.css"
-				: "css/print/paper.css";
-		document.getElementsByTagName("head")[0].appendChild(link);
-	</script>
-</head>
-<body>
-<div class="reveal">
-	<div class="slides">
-		<section>
-			<h1>React components</h1>
-			<h3>Part 1</h3>
-			<p>Denys Kovalishyn</p>
-			<small>October, 2019</small>
-		</section>
-		<section>
-			<p>
-				<span>React</span> разделяет ответственность с помощью
-				<span class="fragment highlight-red">слабо связанных единиц</span>,
-				называемых «компоненты», которые содержат
-				<span class="fragment highlight-red">и</span> разметку,
-				<span class="fragment highlight-red">и</span> логику.
-			</p>
-		</section>
-		<section>
-			<h2>Виды компонентов</h2>
-		</section>
-		<section>
-			<section>
-				<h3>Функциональные компоненты</h3>
-			</section>
-			<section>
-				<h3>Синтаксис</h3>
-				<pre><code data-trim class="language-jsx">
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.type = "text/css";
+      link.href = window.location.search.match(/print-pdf/gi)
+        ? "css/print/pdf.css"
+        : "css/print/paper.css";
+      document.getElementsByTagName("head")[0].appendChild(link);
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>React components</h1>
+          <h3>Part 1</h3>
+          <p>Denys Kovalishyn</p>
+          <small>October, 2019</small>
+        </section>
+        <section>
+          <p>
+            <span>React</span> разделяет ответственность с помощью
+            <span class="fragment highlight-red">слабо связанных единиц</span>,
+            называемых «компоненты», которые содержат
+            <span class="fragment highlight-red">и</span> разметку,
+            <span class="fragment highlight-red">и</span> логику.
+          </p>
+        </section>
+        <section>
+          <h2>Виды компонентов</h2>
+        </section>
+        <section>
+          <section>
+            <h3>Функциональные компоненты</h3>
+          </section>
+          <section>
+            <h3>Синтаксис</h3>
+            <pre><code data-trim class="language-jsx">
 import React from 'react';
+import logo from './logo.svg';
+import './App.css';
 
-export const Header = () => &lt;header&gt;nav&lt;/header&gt;
+const App = () => (
+  &lt;div className="app"&gt;
+    &lt;header className="app-header"&gt;
+      &lt;img src={logo} className="app-logo" alt="logo"/&gt;
+      &lt;p&gt;
+        Edit &lt;code&gt;src/app.js&lt;/code&gt; and save to reload.
+      &lt;/p&gt;
+      &lt;a
+		className="app-link"
+		href="https://reactjs.org"
+		target="_blank"
+		rel="noopener noreferrer"
+		&gt;
+        Learn React
+      &lt;/a&gt;
+    &lt;/header&gt;
+  &lt;/div&gt;
+);
+
+export default App;
         </code></pre>
-			</section>
-			<section>
-				<h3>После компиляции</h3>
-				<img src="assets/fc.png" alt="compiled functional components"/>
-			</section>
-			<section>
-				<h3>Выводы:</h3>
-				<ul>
-					<li>Меньше кода</li>
-					<li>Легче читать и тестировать</li>
-					<li>Работают быстрее</li>
-				</ul>
-			</section>
-		</section>
-		<section>
-			<section>
-				<h3>Классовые компоненты</h3>
-			</section>
-			<section>
-				<h3>Синтаксис</h3>
-				<pre><code data-trim class="language-js">
+          </section>
+          <section>
+            <p>Добавим еще одну ссылку:</p>
+            <pre><code class="language-jsx">
+&lt;div className="app"&gt;
+	&lt;header className="app-header"&gt;
+		&lt;img src={logo} className="app-logo" alt="logo"/&gt;
+		&lt;p&gt;
+			Edit &lt;code&gt;src/app.js&lt;/code&gt; and save to reload.
+		&lt;/p&gt;
+		&lt;nav&gt;
+			&lt;a
+				className="app-link"
+				href="https://reactjs.org"
+				target="_blank"
+				rel="noopener noreferrer"
+			&gt;
+				Learn React
+			&lt;/a&gt;
+			&lt;a
+				className="app-link"
+				href="https://reacttraining.com"
+				target="_blank"
+				rel="noopener noreferrer"
+			&gt;
+				Learn react-router
+			&lt;/a&gt;
+		&lt;/nav&gt;
+	&lt;/header&gt;
+&lt;/div&gt;
+				</code></pre>
+          </section>
+          <section>
+            <h2>Композиция компонентов</h2>
+            <p>
+              React имеет мощную модель композиции, поэтому для повторного
+              использования кода между компонентами мы рекомендуем использовать
+              композицию вместо наследования.
+            </p>
+          </section>
+          <section>
+            <p>Создадим компонент Link</p>
+            <pre><code class="language-jsx">
+import React from "react";
+
+const Link = props => (
+  &lt;a
+      className="app-link"
+      href="https://reacttraining.com"
+      target="_blank"
+      rel="noopener noreferrer"
+  &gt;
+    Learn react-router
+  &lt;/a&gt;
+);
+
+export default Link;
+            </code></pre>
+          </section>
+
+          <section>
+            <h3>Props</h3>
+            <p>
+              props (пропсы) — это входные данные React-компонентов,
+              передаваемые от родительского компонента дочернему компоненту.
+            </p>
+            <p>
+              Помните, props предназначены только для чтения. Ни в каком случае
+              их не следует изменять.
+            </p>
+          </section>
+
+          <section>
+            <p>Сделаем наш компонент более универсальным:</p>
+            <pre><code class="language-jsx">
+import React from "react";
+
+const Link = ({ to }) => (
+  &lt;a
+      className="app-link"
+      href={to}
+      target="_blank"
+      rel="noopener noreferrer"
+  &gt;
+    Learn react-router
+  &lt;/a&gt;
+);
+
+export default Link;
+            </code></pre>
+          </section>
+
+          <section>
+            <p>Выполним композицию компонентов:</p>
+            <pre><code class="language-jsx">
+import React from 'react';
+import Link from './Link';
+import logo from './logo.svg';
+import './App.css';
+
+const App = () => (
+  &lt;div className="app"&gt;
+    &lt;header className="app-header"&gt;
+      &lt;img src={logo} className="app-logo" alt="logo"/&gt;
+      &lt;p&gt;
+        Edit &lt;code&gt;src/app.js&lt;/code&gt; and save to reload.
+      &lt;/p&gt;
+      &lt;nav&gt;
+        &lt;Link to="https://reactjs.org"/&gt;
+        &lt;Link to="https://reacttraining.com"/&gt;
+      &lt;/nav&gt;
+    &lt;/header&gt;
+  &lt;/div&gt;
+);
+
+export default App;
+            </code></pre>
+          </section>
+
+          <section>
+            <h3>props.children</h3>
+            <p>
+              В любом компоненте доступны props.children. Это контент между
+              открывающим и закрывающим тегом компонента.
+            </p>
+          </section>
+
+          <section>
+            <p>Используем props.children для изменения текста наших ссылок:</p>
+            <pre><code class="language-jsx">
+import React from "react";
+
+const Link = ({ to, children }) => (
+  &lt;a
+      className="app-link"
+      href={to}
+      target="_blank"
+      rel="noopener noreferrer"
+  &gt;
+    {children}
+  &lt;/a&gt;
+);
+
+export default Link;
+            </code></pre>
+          </section>
+
+          <section>
+            <p>Поменяем текст наших ссылок</p>
+            <pre><code class="language-jsx">
+import React from 'react';
+import Link from './Link';
+import logo from './logo.svg';
+import './App.css';
+
+const App = () => (
+  &lt;div className="app"&gt;
+    &lt;header className="app-header"&gt;
+      &lt;img src={logo} className="app-logo" alt="logo"/&gt;
+      &lt;p&gt;
+        Edit &lt;code&gt;src/app.js&lt;/code&gt; and save to reload.
+      &lt;/p&gt;
+      &lt;nav&gt;
+        &lt;Link to="https://reactjs.org"&gt;Learn React&lt;/&gt;
+        &lt;Link to="https://reacttraining.com"&gt;Learn React-Router&lt;/&gt;
+      &lt;/nav&gt;
+    &lt;/header&gt;
+  &lt;/div&gt;
+);
+
+export default App;
+            </code></pre>
+          </section>
+
+          <section>
+            <h3>Проверка типов</h3>
+            <p>
+              По мере роста вашего приложения вы можете отловить много ошибок с
+              помощью проверки типов. Для этого можно использовать расширения
+              JavaScript вроде Flow и TypeScript.
+            </p>
+          </section>
+
+          <section>
+            <h3>Библиотека Prop-types</h3>
+            <p>
+              PropTypes предоставляет ряд валидаторов, которые могут
+              использоваться для проверки, что получаемые данные корректны.
+            </p>
+          </section>
+
+          <section>
+            <p>Добавим проверку props в компоненте Link</p>
+            <pre><code class="language-jsx">
+import React from "react";
+import PropTypes from "prop-types";
+import "./styles.css";
+
+const Link = ({ to, children }) => (
+  &lt;a
+    className="app-link"
+    href={to} target="_blank"
+    rel="noopener noreferrer
+  "&gt;
+    {children}
+  &lt;/a&gt;
+);
+
+Link.propTypes = {
+  to: PropTypes.string,
+  children: PropTypes.node
+};
+
+Link.defaultProps = {
+  to: "/",
+  children: "Link"
+};
+
+export default Link;
+            </code></pre>
+          </section>
+
+          <section>
+            <h3>После компиляции</h3>
+            <img src="assets/fc.png" alt="compiled functional components" />
+          </section>
+          <section>
+            <h3>Выводы:</h3>
+            <ul>
+              <li>Меньше кода</li>
+              <li>Легче читать и тестировать</li>
+              <li>Работают быстрее</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3>Классовые компоненты</h3>
+          </section>
+          <section>
+            <h3>Синтаксис</h3>
+            <pre><code data-trim class="language-js">
 import React, { Component } from 'react';
 
 export class Header extends Component {
@@ -89,55 +331,43 @@ export class Header extends Component {
     }
 }
             </code></pre>
-			</section>
-			<section>
-				<h3>После компиляции</h3>
-				<img src="assets/cc.png" alt="compiled class components"/>
-			</section>
-			<section>
-				<h3>Выводы:</h3>
-				<ul>
-					<li>Сложнее синтаксис</li>
-					<li>Сложнее тестировать</li>
-					<li>Требуют больше ресурсов</li>
-					<li>Позволяют работать с состоянием</li>
-					<li>Позволяют использовать события жизненного цикла</li>
-					<li>
-						Дает разработчику больше свободы, тем самым потенциально
-						увеличиваются риски.
-					</li>
-				</ul>
-			</section>
-		</section>
-		<section>
-			<section>
-				<h2>Композиция компонентов</h2>
-				<p>React имеет мощную модель композиции, поэтому для повторного использования кода между
-					компонентами мы рекомендуем использовать композицию вместо наследования.</p>
-			</section>
-			<section>
-			<pre><code class="language-jsx">
+          </section>
+          <section>
+            <h3>После компиляции</h3>
+            <img src="assets/cc.png" alt="compiled class components" />
+          </section>
+          <section>
+            <h3>Выводы:</h3>
+            <ul>
+              <li>Сложнее синтаксис</li>
+              <li>Сложнее тестировать</li>
+              <li>Требуют больше ресурсов</li>
+              <li>Позволяют работать с состоянием</li>
+              <li>Позволяют использовать события жизненного цикла</li>
+              <li>
+                Дает разработчику больше свободы, тем самым потенциально
+                увеличиваются риски.
+              </li>
+            </ul>
+          </section>
+        </section>
+      </div>
+    </div>
 
-			</code></pre>
-			</section>
-		</section>
-	</div>
-</div>
+    <script src="js/reveal.js"></script>
 
-<script src="js/reveal.js"></script>
-
-<script>
-	// More info about config & dependencies:
-	// - https://github.com/hakimel/reveal.js#configuration
-	// - https://github.com/hakimel/reveal.js#dependencies
-	Reveal.initialize({
-		dependencies: [
-			{ src: "plugin/markdown/marked.js" },
-			{ src: "plugin/markdown/markdown.js" },
-			{ src: "plugin/notes/notes.js", async: true }
-		]
-	});
-</script>
-<script src="js/prism.js"></script>
-</body>
+    <script>
+      // More info about config & dependencies:
+      // - https://github.com/hakimel/reveal.js#configuration
+      // - https://github.com/hakimel/reveal.js#dependencies
+      Reveal.initialize({
+        dependencies: [
+          { src: "plugin/markdown/marked.js" },
+          { src: "plugin/markdown/markdown.js" },
+          { src: "plugin/notes/notes.js", async: true }
+        ]
+      });
+    </script>
+    <script src="js/prism.js"></script>
+  </body>
 </html>
