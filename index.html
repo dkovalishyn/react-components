@@ -49,6 +49,9 @@
         <section>
           <h2>Виды компонентов</h2>
         </section>
+
+        <!--        Functional components-->
+
         <section>
           <section>
             <h3>Функциональные компоненты</h3>
@@ -307,6 +310,7 @@ export default Link;
             <h3>После компиляции</h3>
             <img src="assets/fc.png" alt="compiled functional components" />
           </section>
+
           <section>
             <h3>Выводы:</h3>
             <ul>
@@ -316,26 +320,217 @@ export default Link;
             </ul>
           </section>
         </section>
+
+        <!--        End of functional components-->
+
+        <!--        Class components-->
+
         <section>
           <section>
             <h3>Классовые компоненты</h3>
           </section>
+
           <section>
             <h3>Синтаксис</h3>
             <pre><code data-trim class="language-js">
 import React, { Component } from 'react';
 
-export class Header extends Component {
+export class StudentsList extends Component {
     render() {
-        return &lt;div&gt;Header&lt;/div&gt;
+        return &lt;div&gt;Students list&lt;/div&gt;
     }
 }
             </code></pre>
           </section>
+
+          <section>
+            <p>Создадим форму:</p>
+            <pre><code class="language-jsx">
+import React, { Component } from "react";
+
+class AddStudentForm extends Component {
+  render() {
+    return (
+      &lt;form&gt;
+        &lt;input type="text" defaultValue="Иван"/&gt;
+        &lt;button&gt;Сохранить&lt;/button&gt;
+      &lt;/form&gt;
+    );
+  }
+}
+
+export default AddStudentForm;
+            </code></pre>
+          </section>
+
+          <section>
+            <h3>Refs</h3>
+            <p>
+              Рефы дают возможность получить доступ к DOM-узлам или
+              React-элементам, созданным в рендер-методе.
+            </p>
+          </section>
+
+          <section>
+            <h3>Когда использовать рефы</h3>
+            <p>Ситуации, в которых использования рефов является оправданным:</p>
+            <ul>
+              <li class="fragment fade-up">
+                Управление фокусом, выделение текста или воспроизведение медиа.
+              </li>
+              <li class="fragment fade-up">Императивный вызов анимаций.</li>
+              <li class="fragment fade-up">
+                Интеграция со сторонними DOM-библиотеками.
+              </li>
+            </ul>
+
+            <p class="fragment fade-right">
+              Избегайте использования рефов в ситуациях, когда задачу можно
+              решить декларативным способом.
+            </p>
+          </section>
+
+          <section>
+            <p>Неконтролируемый компонент:</p>
+            <pre><code class="language-jsx">
+import React, { Component } from "react";
+
+class AddStudentForm extends Component {
+  inputRef = React.createRef();
+
+  handleSubmit = () => alert(this.inputRef.current.value);
+
+  render() {
+    return (
+      &lt;form onSubmit={this.handleSubmit}&gt;
+        &lt;input
+          ref={this.inputRef}
+          type="text"
+          defaultValue="Иван"
+        /&gt;
+        &lt;button&gt;Сохранить&lt;/button&gt;
+      &lt;/form&gt;
+    );
+  }
+}
+
+export default AddStudentForm;
+            </code></pre>
+          </section>
+
+          <section>
+            <h3>state</h3>
+            <p>
+              State представляет собой механизм, который позволяет хранить
+              данные, генерируемые компонентом, и синхронизировать отображение
+              компонента с этими данными
+            </p>
+          </section>
+
+          <section>
+            <h3>props vs state</h3>
+            <p class="fragment fade-right">
+              Самая большая разница между state и props состоит в том, что props
+              передаются от родителя потомку, а state управляется самим
+              компонентом. Компонент не может изменять props, но может изменять
+              state.
+            </p>
+            <p class="fragment fade-right">
+              Для каждой отдельной части изменяемых данных должен существовать
+              только один компонент, который «управляет» изменением состояния.
+            </p>
+          </section>
+
+          <section>
+            <h3>Нужен ли мне state?</h3>
+            <p>
+              Вам скорее всего не нужен state если:
+            </p>
+            <ul>
+              <li class="fragment fade-up">
+                Вы копируете в state какое-то значение из props.
+              </li>
+              <li class="fragment fade-up">
+                Значение в state передается от родителей либо его можно каким-то
+                образом вывести из props
+              </li>
+              <li class="fragment fade-up">Значение в state не меняется.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Контролируемый компонент:</h3>
+            <pre><code class="language-jsx">
+import React, { Component } from "react";
+
+class AddStudentForm extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: "Иван"
+    };
+  }
+
+  setName = ({ target: { value } }) =>
+    this.setState({ name: value });
+
+  handleSubmit = () => alert(this.state.name);
+
+  render() {
+    return (
+      &lt;form onSubmit={this.handleSubmit}&gt;
+        &lt;input
+          type="text"
+          onChange={this.setName}
+          value={this.state.name}
+        /&gt;
+        &lt;button&gt;Сохранить&lt;/button&gt;
+      &lt;/form&gt;
+    );
+  }
+}
+
+export default AddStudentForm;
+            </code></pre>
+          </section>
+
+          <section>
+            <p>setState</p>
+            <pre><code class="language-js">setState(updater, [callback])</code></pre>
+            <dl>
+              <dt>updater</dt>
+              <dd>
+                это функция либо объект, которая определяет каким должно быть
+                состояние компонента после рендеринга
+              </dd>
+              <dt>callback</dt>
+              <dd>
+                это функция, которая будет вызвана после обновления состояния
+                компонента
+              </dd>
+            </dl>
+          </section>
+
+          <section>
+            <p>updater</p>
+            <pre><code class="language-js">(state, props) => stateChange</code></pre>
+            <pre><code class="language-js">stateChange</code></pre>
+            <dl>
+              <dt>state</dt>
+              <dd>текущее состояние компонента</dd>
+              <dt>props</dt>
+              <dd>текущие пропсы компонента</dd>
+              <dt>stateChange</dt>
+              <dd>ожидаемые изменения в состоянии</dd>
+            </dl>
+          </section>
+
           <section>
             <h3>После компиляции</h3>
             <img src="assets/cc.png" alt="compiled class components" />
           </section>
+
           <section>
             <h3>Выводы:</h3>
             <ul>
@@ -351,6 +546,8 @@ export class Header extends Component {
             </ul>
           </section>
         </section>
+
+        <!--        End of class components-->
       </div>
     </div>
 
