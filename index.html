@@ -31,12 +31,14 @@
   <body>
     <div class="reveal">
       <div class="slides">
+
         <section>
           <h1>React components</h1>
           <h3>Part 1</h3>
           <p>Denys Kovalishyn</p>
           <small>October, 2019</small>
         </section>
+
         <section>
           <p>
             <span>React</span> разделяет ответственность с помощью
@@ -46,12 +48,12 @@
             <span class="fragment highlight-red">и</span> логику.
           </p>
         </section>
+
         <section>
           <h2>Виды компонентов</h2>
         </section>
 
-        <!--        Functional components-->
-
+        <!--Functional components-->
         <section>
           <section>
             <h3>Функциональные компоненты</h3>
@@ -320,11 +322,9 @@ export default Link;
             </ul>
           </section>
         </section>
+        <!--End of functional components-->
 
-        <!--        End of functional components-->
-
-        <!--        Class components-->
-
+        <!--Class components-->
         <section>
           <section>
             <h3>Классовые компоненты</h3>
@@ -527,27 +527,164 @@ export default AddStudentForm;
           </section>
 
           <section>
-            <h3>После компиляции</h3>
-            <img src="assets/cc.png" alt="compiled class components" />
+            <p>Добавим автоматическое сохранение в форму:</p>
+            <pre><code class="language-jsx">
+import React, { Component } from "react";
+
+class AddStudentForm extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: 0,
+      ...JSON.parse(localStorage.getItem(FORM_KEY)),
+    };
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.saveTimer = setTimeout(this.serializeValues, 2000);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.saveTimer);
+  }
+
+  serializeValues = () => {
+    localStorage.setItem(FORM_KEY, JSON.stringify(this.state));
+    alert('Values saved!');
+  };
+
+  setName = ({ target: { value } }) => {
+    this.setState({ name: value });
+  };
+
+  handleSubmit = () => alert(this.state.name);
+
+  render() {
+    return (
+      &lt;form onSubmit={this.handleSubmit}&gt;
+        &lt;input
+          type="text"
+          onChange={this.setName}
+          value={this.state.name}
+        /&gt;
+        &lt;button&gt;Сохранить&lt;/button&gt;
+      &lt;/form&gt;
+    );
+  }
+}
+
+export default AddStudentForm;
+            </code></pre>
           </section>
 
           <section>
-            <h3>Выводы:</h3>
-            <ul>
-              <li>Сложнее синтаксис</li>
-              <li>Сложнее тестировать</li>
-              <li>Требуют больше ресурсов</li>
-              <li>Позволяют работать с состоянием</li>
-              <li>Позволяют использовать события жизненного цикла</li>
-              <li>
-                Дает разработчику больше свободы, тем самым потенциально
-                увеличиваются риски.
-              </li>
-            </ul>
+            <p>Методы жизненного цикла</p>
+            <a
+              href="http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/"
+              >Диаграмма</a
+            >
+          </section>
+          <section>
+            <p>Fragment</p>
+            <pre><code class="language-jsx">
+ render() {
+    return (
+      &lt;React.Fragment&gt;
+        &lt;Header /&gt;
+          Students form:
+          &lt;form onSubmit={this.handleSubmit}&gt;
+          &lt;input
+            type="text"
+            onChange={this.setName}
+            value={this.state.name}
+          /&gt;
+          &lt;button&gt;Сохранить&lt;/button&gt;
+        &lt;/form&gt;
+      &lt;/React.Fragment&gt;
+    );
+  }
+            </code></pre>
+          </section>
+          <section>
+            <p>Fragment without props</p>
+            <pre><code class="language-jsx">
+ render() {
+    return (
+      &lt;&gt;
+        &lt;Header /&gt;
+        Students form:
+        &lt;form onSubmit={this.handleSubmit}&gt;
+          &lt;input
+            type="text"
+            onChange={this.setName}
+            value={this.state.name}
+          /&gt;
+          &lt;button&gt;Сохранить&lt;/button&gt;
+        &lt;/form&gt;
+      &lt;/&gt;
+    );
+  }
+            </code></pre>
           </section>
         </section>
+        <!--End of class components-->
 
-        <!--        End of class components-->
+        <!--Keys-->
+        <section>
+          <section>
+            <h2>Key</h2>
+            <p></p>
+          </section>
+        </section>
+        <!--Portals-->
+
+        <!--Keys-->
+        <section>
+          <section>
+            <h2>Portals</h2>
+            <p></p>
+          </section>
+          <section></section>
+        </section>
+        <!--End of keys-->
+
+        <!--Styles-->
+        <section>
+          <section><h2>Styles</h2></section>
+          <section><h3>CSS</h3></section>
+          <section><h3>CSS modules</h3></section>
+          <section><h3>Inline styles</h3></section>
+          <section><h3>Styled components</h3></section>
+        </section>
+        <!--End of styles-->
+
+        <!--Error boundary-->
+        <section>
+          <h3>Error boundary</h3>
+          <a href="https://codepen.io/gaearon/pen/wqvxGa?editors=0010">
+            Example by Dan Abramov
+          </a>
+        </section>
+        <!--End of error boundary-->
+
+        <!--HOC-->
+        <!--End of HOC-->
+
+        <!--Render Prop-->
+        <section>
+          <section>
+            <p>Render prop - </p>
+          </section>
+        </section>
+        <!--end of render prop-->
+
+        <!--HomeWork-->
+        <section>
+          <h2>Домашнее задание</h2>
+          <section></section>
+        </section>
+        <!--End of homework-->
       </div>
     </div>
 
