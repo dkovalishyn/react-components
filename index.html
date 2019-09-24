@@ -31,27 +31,109 @@
   <body>
     <div class="reveal">
       <div class="slides">
-        <section>
+        <section
+          data-background-image="assets/components.jpeg"
+          data-background-opacity="0.2"
+        >
           <h1>React components</h1>
-          <h3>Part 1</h3>
           <p>Denys Kovalishyn</p>
           <small>October, 2019</small>
         </section>
+
         <section>
           <p>
             <span>React</span> разделяет ответственность с помощью
-            <span class="fragment highlight-red">слабо связанных единиц</span>,
-            называемых «компоненты», которые содержат
-            <span class="fragment highlight-red">и</span> разметку,
-            <span class="fragment highlight-red">и</span> логику.
+            <span class="fragment highlight-current-red"
+              >слабо связанных единиц</span
+            >, называемых «компоненты», которые содержат и разметку, и логику.
           </p>
         </section>
+
         <section>
-          <h2>Виды компонентов</h2>
+          <section>
+            <h2>Виды компонентов</h2>
+          </section>
+          <section>
+            <h3>Разделение по синтаксису</h3>
+            <dl class="fragment fade-up">
+              <dt class="fragment fade-up highlight-blue">
+                Functional component
+              </dt>
+              <dd class="fragment fade-up">
+                Представляет собой чистую функцию, которая принимает пропсы и
+                возвращает элемент дерева.
+              </dd>
+              <dt class="fragment fade-up highlight-blue">Class component</dt>
+              <dd class="fragment fade-up">
+                Представляет собой класс, который наследует React.Component.
+                Элемент дерева возвращается из метода рендер.
+              </dd>
+            </dl>
+          </section>
+          <section>
+            <h3>Разделение по наличию состояния</h3>
+            <dl class="fragment fade-up">
+              <dt class="fragment fade-up highlight-green">
+                Stateless component
+              </dt>
+              <dd class="fragment fade-up">
+                Не содержит состояния. Результат рендеринга зависит только от
+                пропсов.
+              </dd>
+              <dt class="fragment fade-up highlight-green">
+                Stateful component
+              </dt>
+              <dd class="fragment fade-up">
+                Состояние - важная часть компонента. Результат рендеринга
+                зависит и от пропсов, и от состояния.
+              </dd>
+            </dl>
+          </section>
+          <section>
+            <h3>Разделение по роли</h3>
+            <dl class="fragment fade-up">
+              <dt class="fragment fade-up highlight-red">
+                Presentational components
+              </dt>
+              <dd class="fragment fade-up">
+                Отвечают за то, как интерфейс выглядит. Очень редко содержат
+                состояние и зависимости от других частей приложения.<br />
+                <em class="fragment fade-right">
+                  Пример: Page, Sidebar, Story, UserInfo, List
+                </em>
+              </dd>
+              <dt class="fragment fade-up highlight-red">Containers</dt>
+              <dd class="fragment fade-up">
+                Отвечают за то, как интерфейс работает. Часто содержат
+                состояние, управляют потоками данных, делают запросы.<br />
+                <em class="fragment fade-right">
+                  Пример: UserPage, FollowersSidebar, StoryContainer,
+                  FollowedUserList
+                </em>
+              </dd>
+            </dl>
+          </section>
+          <section>
+            <h3>Pure vs Impure</h3>
+            <dl class="fragment fade-up">
+              <dt class="fragment fade-up highlight-green">Pure components</dt>
+              <dd class="fragment fade-up">
+                Гарантированно возвращают тот же самый результат при тех же
+                самых значениях аргументов. Не зависят от изменений props на
+                глубоком уровне вложенности.
+              </dd>
+              <dt class="fragment fade-up highlight-green">
+                Impure components
+              </dt>
+              <dd class="fragment fade-up">
+                Для оптимизации производительности необходимо сравнение входных
+                параметров на всех уровнях вложенности.
+              </dd>
+            </dl>
+          </section>
         </section>
 
-        <!--        Functional components-->
-
+        <!--Functional components-->
         <section>
           <section>
             <h3>Функциональные компоненты</h3>
@@ -247,8 +329,12 @@ const App = () => (
         Edit &lt;code&gt;src/app.js&lt;/code&gt; and save to reload.
       &lt;/p&gt;
       &lt;nav&gt;
-        &lt;Link to="https://reactjs.org"&gt;Learn React&lt;/&gt;
-        &lt;Link to="https://reacttraining.com"&gt;Learn React-Router&lt;/&gt;
+        &lt;Link to="https://reactjs.org"&gt;
+          Learn React
+        &lt;/Link&gt;
+        &lt;Link to="https://reacttraining.com"&gt;
+          Learn React-Router
+        &lt;/Link&gt;
       &lt;/nav&gt;
     &lt;/header&gt;
   &lt;/div&gt;
@@ -305,26 +391,14 @@ Link.defaultProps = {
 export default Link;
             </code></pre>
           </section>
-
-          <section>
-            <h3>После компиляции</h3>
-            <img src="assets/fc.png" alt="compiled functional components" />
-          </section>
-
-          <section>
-            <h3>Выводы:</h3>
-            <ul>
-              <li>Меньше кода</li>
-              <li>Легче читать и тестировать</li>
-              <li>Работают быстрее</li>
-            </ul>
-          </section>
+          <section
+            data-background-iframe="https://codepen.io/dkovalishyn/pen/abbzNWj?editors=0010"
+            data-background-interactive
+          ></section>
         </section>
+        <!--End of functional components-->
 
-        <!--        End of functional components-->
-
-        <!--        Class components-->
-
+        <!--Class components-->
         <section>
           <section>
             <h3>Классовые компоненты</h3>
@@ -527,31 +601,472 @@ export default AddStudentForm;
           </section>
 
           <section>
-            <h3>После компиляции</h3>
-            <img src="assets/cc.png" alt="compiled class components" />
-          </section>
+            <p>Добавим автоматическое сохранение в форму:</p>
+            <pre><code class="language-jsx">
+import React, { Component } from "react";
 
+class AddStudentForm extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: 0,
+      ...JSON.parse(localStorage.getItem(FORM_KEY)),
+    };
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.saveTimer = setTimeout(this.serializeValues, 2000);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.saveTimer);
+  }
+
+  serializeValues = () => {
+    localStorage.setItem(FORM_KEY, JSON.stringify(this.state));
+    alert('Values saved!');
+  };
+
+  setName = ({ target: { value } }) => {
+    this.setState({ name: value });
+  };
+
+  handleSubmit = () => alert(this.state.name);
+
+  render() {
+    return (
+      &lt;form onSubmit={this.handleSubmit}&gt;
+        &lt;input
+          type="text"
+          onChange={this.setName}
+          value={this.state.name}
+        /&gt;
+        &lt;button&gt;Сохранить&lt;/button&gt;
+      &lt;/form&gt;
+    );
+  }
+}
+
+export default AddStudentForm;
+            </code></pre>
+          </section>
           <section>
-            <h3>Выводы:</h3>
+            <h2>Методы жизненного цикла</h2>
+          </section>
+          <section
+            data-background-iframe="http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/"
+            data-background-color="white"
+            data-background-interactive
+          ></section>
+          <section>
+            <p>Fragment</p>
+            <pre><code class="language-jsx">
+ render() {
+    return (
+      &lt;React.Fragment&gt;
+        &lt;Header /&gt;
+          Students form:
+          &lt;form onSubmit={this.handleSubmit}&gt;
+          &lt;input
+            type="text"
+            onChange={this.setName}
+            value={this.state.name}
+          /&gt;
+          &lt;button&gt;Сохранить&lt;/button&gt;
+        &lt;/form&gt;
+      &lt;/React.Fragment&gt;
+    );
+  }
+            </code></pre>
+          </section>
+          <section>
+            <p>Fragment without props</p>
+            <pre><code class="language-jsx">
+ render() {
+    return (
+      &lt;&gt;
+        &lt;Header /&gt;
+        Students form:
+        &lt;form onSubmit={this.handleSubmit}&gt;
+          &lt;input
+            type="text"
+            onChange={this.setName}
+            value={this.state.name}
+          /&gt;
+          &lt;button&gt;Сохранить&lt;/button&gt;
+        &lt;/form&gt;
+      &lt;/&gt;
+    );
+  }
+            </code></pre>
+          </section>
+        </section>
+        <!--End of class components-->
+
+        <!--Keys-->
+        <section>
+          <section>
+            <h2>Key</h2>
+            <p>
+              Ключи помогают React определять, какие элементы были изменены,
+              добавлены или удалены. Их необходимо указывать, чтобы React мог
+              сопоставлять элементы массива с течением времени
+            </p>
+            <pre><code class="language-jsx">
+const StudentsList = ({ students }) =>
+  students.map(student =>
+    &lt;Student key={student.id} {...student}/&gt;);
+            </code></pre>
+          </section>
+          <section
+            data-background-iframe="https://codepen.io/dkovalishyn/pen/BaayKEp?editors=0010"
+            data-background-interactive
+          ></section>
+        </section>
+        <!--End of keys-->
+
+        <!--Portals-->
+        <section>
+          <section
+            data-background-image="https://media.giphy.com/media/xUPGcHXdeQ3zl8UW76/giphy.gif"
+            data-background-opacity="0.2"
+          >
+            <h2>Portals</h2>
+            <p>
+              Порталы позволяют рендерить дочерние элементы в DOM-узел, который
+              находится вне DOM-иерархии родительского компонента.
+            </p>
+            <pre><code class="language-js">ReactDOM.createPortal(child, container)</code></pre>
+          </section>
+          <section
+            data-background-iframe="https://codepen.io/dkovalishyn/pen/wvvKoOa"
+            data-background-interactive
+          ></section>
+        </section>
+        <!--End of portals-->
+
+        <!--Styles-->
+        <section>
+          <section
+            data-background-image="https://media.giphy.com/media/b83JK8QwtLzxu/giphy.gif"
+            data-background-opacity="0.2"
+          >
+            <h2>Styles</h2>
+          </section>
+          <section>
+            <h3>CSS</h3>
+            <pre><code class="language-jsx">import React from "react";
+import "./styles.css";
+
+const CssStyles = () => &lt;p className="text"&gt;Css styles&lt;/p&gt;
+
+export default CssStyles;
+</code></pre>
+          </section>
+          <section>
+            <h3>CSS modules</h3>
+            <pre><code class="language-jsx">import React from "react";
+import styles from "./styles.module.scss";
+
+const CssModules = () =>
+              &lt;p className={styles.text}&gt;Css Modules&lt;/p&gt;;
+
+export default CssModules;</code></pre>
+          </section>
+          <section>
+            <h3>Inline styles</h3>
+            <pre><code class="language-jsx">import React from "react";
+
+const textStyles = {
+  textTransform: "uppercase",
+  textAlign: "center",
+  fontSize: "24px"
+};
+
+const InlineStyles = () => &lt;p style={textStyles}&gt;Inline Styles&lt;/p&gt;;
+
+export default InlineStyles;</code></pre>
+          </section>
+          <section>
+            <h3>Styled components</h3>
+            <pre><code class="language-jsx">import React from "react";
+import styled from "styled-components";
+
+const Text = styled.p`
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 24px;
+`;
+
+const StyledComponents = () => &lt;Text&gt;Styled components&lt;/Text&gt;;
+
+export default StyledComponents;</code></pre>
+          </section>
+        </section>
+        <!--End of styles-->
+
+        <!--Error boundary-->
+        <section>
+          <section
+            data-background-image="https://media.giphy.com/media/TqiwHbFBaZ4ti/giphy.gif"
+            data-background-opacity="0.2"
+          >
+            <h3>Error boundary (предохранители)</h3>
+            <p>
+              Предохранители это компоненты React, которые отлавливают ошибки
+              JavaScript в любом месте деревьев их дочерних компонентов,
+              сохраняют их в журнале ошибок и выводят запасной UI вместо
+              рухнувшего дерева компонентов.
+            </p>
+          </section>
+          <section
+            data-background-iframe="https://codepen.io/gaearon/pen/wqvxGa?editors=0010"
+            data-background-interactive
+          ></section>
+        </section>
+        <!--End of error boundary-->
+
+        <!--HOC-->
+        <section>
+          <section
+            data-background-image="https://media.giphy.com/media/oO8yKcmTxjrm0Ony4f/giphy.gif"
+            data-background-opacity="0.2"
+          >
+            <h2>Higher-Order Component (HOC)</h2>
+          </section>
+          <section>
+            <p>
+              Компонент высшего порядка — это функция, которая принимает
+              компонент и возвращает новый компонент.
+            </p>
+            <pre><code class="language-js">const EnhancedComponent = higherOrderComponent(WrappedComponent);</code></pre>
+          </section>
+          <section>
+            <p>Напишем HOC, который раз в секунду обновляет время.</p>
+            <pre><code class="language-jsx">import React, { Component } from "react";
+
+export default WrappedComponent => {
+  return class extends Component {
+    state = { time: new Date() };
+
+    componentDidMount() {
+      this.interval = setInterval(this.updateTime, 1000);
+    }
+
+    componentWillUnmount() {
+      clearInterval(this.interval);
+    }
+
+    updateTime = () => {
+      this.setState({ time: new Date() });
+    };
+
+    render() {
+      return &lt;WrappedComponent {...this.props} {...this.state}/&gt;
+    }
+  };
+};
+</code></pre>
+          </section>
+          <section>
+            <p>Как использовать HOC</p>
+            <pre><code class="language-jsx">import React from 'react';
+import withTime from "../withTime";
+
+export const TimeViewer = ({ time }) =>
+              &lt;div&gt;{time.toLocaleString()}&lt;/div&gt;
+
+export default withTime(TimeViewer);</code></pre>
+          </section>
+          <section
+            data-background-iframe="https://codepen.io/dkovalishyn/pen/rNNWgzq?editors=0010"
+            data-background-interactive
+          ></section>
+        </section>
+        <!--End of HOC-->
+
+        <!--Render Prop-->
+        <section>
+          <section>
+            <h2>Рендер-пропсы</h2>
+            <p>
+              Термин «рендер-проп» относится к возможности компонентов React
+              разделять код между собой с помощью пропа, значение которого
+              является функцией.
+            </p>
+            <pre><code class="language-jsx">&lt;DataProvider render={data =&gt; (
+  &lt;h1&gt;Привет, {data.target}&lt;/h1&gt;
+)}/&gt;</code></pre>
+          </section>
+          <section
+            data-background-iframe="https://codepen.io/dkovalishyn/pen/XWWKqzP?editors=0110"
+            data-background-interactive
+          ></section>
+        </section>
+        <!--end of render prop-->
+
+        <!-- Context -->
+        <section>
+          <section>
+            <h2>Context</h2>
+            <p>
+              Контекст позволяет передавать данные через дерево компонентов без
+              необходимости передавать пропсы на промежуточных уровнях.
+            </p>
+          </section>
+          <section>
+            <p>React.createContext</p>
+            <pre><code class="language-js">const MyContext = React.createContext(defaultValue);</code></pre>
+            <p>Context.Provider</p>
+            <pre><code class="language-js">&lt;MyContext.Provider value={/* некоторое значение */}&gt;</code></pre>
+            <p>Context.Consumer</p>
+            <pre><code class="language-jsx">&lt;MyContext.Consumer&gt;
+  {value => /* отрендерить что-то, используя значение контекста */}
+&lt;/MyContext.Consumer&gt;</code></pre>
+          </section>
+          <section>
+            <h6>Class.contextType</h6>
+            <pre><code class="language-js">class MyClass extends React.Component {
+  componentDidMount() {
+    let value = this.context;
+    /* выполнить побочный эффект
+    на этапе монтирования, используя значение MyContext */
+  }
+  componentDidUpdate() {
+    let value = this.context;
+    /* ... */
+  }
+  componentWillUnmount() {
+    let value = this.context;
+    /* ... */
+  }
+  render() {
+    let value = this.context;
+    /* отрендерить что-то, используя значение MyContext */
+  }
+}
+MyClass.contextType = MyContext;</code></pre>
+          </section>
+          <section>
+            <h6>При использовании синтаксиса публичных полей класса:</h6>
+            <pre><code class="language-js">class MyClass extends React.Component {
+  static contextType = MyContext;
+  render() {
+    let value = this.context;
+    /* отрендерить что-то, используя значение MyContext */
+  }
+}</code></pre>
+          </section>
+          <section>
+            <h6>Компонент, который может использовать несколько контекстов</h6>
+            <pre><code class="language-jsx">
+function Content() {
+  return (
+    &lt;ThemeContext.Consumer&gt;
+      {theme =&gt; (
+        &lt;UserContext.Consumer&gt;
+          {user =&gt; (
+            &lt;ProfilePage user={user} theme={theme}/&gt;
+          )}
+        &lt;/UserContext.Consumer&gt;
+      )}
+    &lt;/ThemeContext.Consumer&gt;
+  );
+}
+</code></pre>
+          </section>
+        </section>
+        <!-- End of context -->
+
+        <!-- Animations -->
+        <section>
+          <section>
+            <h2>Анимации</h2>
+            <p>Наиболее распространенными являются три библиотеки анимации:</p>
             <ul>
-              <li>Сложнее синтаксис</li>
-              <li>Сложнее тестировать</li>
-              <li>Требуют больше ресурсов</li>
-              <li>Позволяют работать с состоянием</li>
-              <li>Позволяют использовать события жизненного цикла</li>
-              <li>
-                Дает разработчику больше свободы, тем самым потенциально
-                увеличиваются риски.
+              <li class="fragment fade-up">
+                <a
+                  href="https://reactcommunity.org/react-transition-group/"
+                  target="_blank"
+                  >React transition group</a
+                >
+              </li>
+              <li class="fragment fade-up">
+                <a
+                  href="https://github.com/chenglou/react-motion"
+                  target="_blank"
+                  >React motion</a
+                >
+              </li>
+              <li class="fragment fade-up">
+                <a
+                  href="https://www.react-spring.io/docs/hooks/basics"
+                  target="_blank"
+                  >React spring</a
+                >
               </li>
             </ul>
           </section>
+          <section
+            data-background-iframe="https://codesandbox.io/s/00rqyo26kn?from-embed"
+            data-background-interactive
+          ></section>
         </section>
+        <!-- End of animations -->
 
-        <!--        End of class components-->
+        <!--HomeWork-->
+        <section>
+          <section>
+            <h2>Домашнее задание</h2>
+          </section>
+          <section>
+            <h3>Основное задание:</h3>
+            <ol>
+              <li class="fragment fade-up">
+                Создать компонент Post, который будет отображать такие поля, как
+                userId, id, title и body.
+              </li>
+              <li class="fragment fade-up">
+                Создать компонент, который будет отображать список постов и поле
+                для их фильтрации.
+              </li>
+              <li class="fragment fade-up">
+                Сфетчить список постов с ресурса
+                https://jsonplaceholder.typicode.com/posts и отобразить их в
+                блоге. Пока список загружается - вывести Loading, если в
+                процессе загрузки возникла ошибка - вывести Something went wrong
+              </li>
+            </ol>
+          </section>
+          <section>
+            <h3>Дополнительное задание:</h3>
+            <ol>
+              <li class="fragment fade-up">
+                Вынести логику для фетча в HOC.
+              </li>
+              <li class="fragment fade-up">
+                Добавить таймер, который будет отображать, сколько секунд назад
+                обновлялся список постов.
+              </li>
+              <li class="fragment fade-up">
+                Реализовать возможность добавить пост в избранные и кнопку в
+                блоге, чтобы показать только избранные записи.
+              </li>
+            </ol>
+          </section>
+        </section>
+        <!--End of homework-->
+        <section
+          data-background-image="assets/components.jpeg"
+          data-background-opacity="0.2"
+        >
+          <h3>Спасибо за внимание</h3>
+        </section>
       </div>
     </div>
 
-    <script src="js/reveal.js"></script>
+    <script src="js/reveal.min.js"></script>
 
     <script>
       // More info about config & dependencies:
